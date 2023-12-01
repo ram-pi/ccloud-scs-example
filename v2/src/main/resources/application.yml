@@ -1,0 +1,35 @@
+spring.cloud:
+  function:
+    definition: generate
+
+  stream:
+    kafka:
+      binder:
+        brokers: ${BOOTSTRAP_SERVER}
+        configuration:
+          security.protocol: SASL_SSL
+          sasl:
+            mechanism: PLAIN
+            jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${KAFKA_API_KEY}' password='${KAFKA_API_SECRET}';
+
+        requiredAcks: all
+        autoCreateTopics: true
+        autoAddPartitions: false
+
+        producer-properties:
+          value:
+            serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+            subject.name.strategy: io.confluent.kafka.serializers.subject.TopicNameStrategy
+          schema.registry.url: ${SR_URL}
+          basic:
+            auth:
+              credentials:
+                source: USER_INFO
+              user:
+                info: ${SR_API_KEY}:${SR_API_SECRET}
+
+    bindings:
+      generate-out-0:
+        destination: sensor-data
+        producer:
+          auto-startup: true

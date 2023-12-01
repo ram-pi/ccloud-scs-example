@@ -1,0 +1,54 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "aliases": [
+        "temperature"
+      ],
+      "default": 0.0,
+      "name": "internalTemperature",
+      "type": "float"
+    },
+    {
+      "default": 0.0,
+      "name": "externalTemperature",
+      "type": "float"
+    },
+    {
+      "default": 0.0,
+      "name": "acceleration",
+      "type": "float"
+    },
+    {
+      "default": 0.0,
+      "name": "velocity",
+      "type": "float"
+    },
+    {
+      "name": "accelerometer",
+      "type": [
+        "null",
+        {
+          "items": "float",
+          "type": "array"
+        }
+      ]
+    },
+    {
+      "name": "magneticField",
+      "type": [
+        "null",
+        {
+          "items": "float",
+          "type": "array"
+        }
+      ]
+    }
+  ],
+  "name": "Sensor",
+  "namespace": "com.github.rampi.ccloud.model",
+  "type": "record"
+}
